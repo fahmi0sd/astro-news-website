@@ -1,0 +1,25 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export const getStaticPaths = async () => {
+    const blogPosts = await getCollection('blog');
+    type BlogPost = CollectionEntry<'blog'>;
+    return blogPosts.map((post: BlogPost) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+};
+
+interface Props {
+    post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+console.log(post);
+---
+
+<MainLayout title="Blog Post">
+    <h1>{ post.data.title }</h1>
+    <p>This is a placeholder for the blog post content.</p>
+</MainLayout>

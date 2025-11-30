@@ -14,7 +14,19 @@ console.log(blogPosts);
     <ul>
         {
             blogPosts
-                .filter((post: BlogPost) => !post.data.isPinned)
+                .filter((post: BlogPost) => post.data.isPinned)
+                .map((post: BlogPost) => (
+                <li>
+                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <h2>Articles</h2>
+    <ul>
+        {
+            blogPosts
                 .map((post: BlogPost) => (
                 <li>
                     <a href={`/blog/${post.slug}`}>{post.data.title}</a>
